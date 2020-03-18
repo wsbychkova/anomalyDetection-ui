@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { getCovid } from '../../store/actions/covid.thunk';
 import Chart from "react-google-charts";
+import moment from "moment";
 
 class COVIData extends React.Component {
   state = {
@@ -14,6 +15,7 @@ class COVIData extends React.Component {
     this.props.getCovid()
   }
 
+
   render() {
     const { covid } = this.props;
     const cities = covid.filter(data => data.province === 'Hubei'
@@ -21,31 +23,41 @@ class COVIData extends React.Component {
       || data.province === 'Henan'
       || data.province === 'Zhejiang')
 
-    console.log('cities :', cities);
+    const chartDataHead = ['Data']
+    let chartDateBody = []
+
+    cities.forEach(city => {
+      chartDataHead.push(city.province)
+    });
+
+    if (cities[0]) {
+      for (let i in cities[0].observed_data) {
+        const formatDate = moment(cities[0].observed_data[i].date).format('L')
+        chartDateBody[i] = [formatDate]
+      }
+    }
+
+    chartDateBody.map(body => {
+      for (let i in cities) {
+        cities[i].observed_data.map(data => {
+          const formatDate = moment(data.date).format('L')
+
+          if (formatDate === body[0]) {
+            body.push(data.value)
+          }
+        })
+      }
+    })
+
+    chartDateBody.splice(0, 0, chartDataHead)
+console.log('chartDateBody :', chartDateBody);
     return (
       <Chart
-        width={400}
-        height={300}
+        width={'100%'}
+        height={600}
         chartType="LineChart"
         loader={<div>Loading Chart</div>}
-        data={[
-          [
-            { type: 'number', label: 'x' },
-            { type: 'number', label: 'values' },
-            { id: 'i0', type: 'number', role: 'interval' },
-            { id: 'i1', type: 'number', role: 'interval' },
-            { id: 'i2', type: 'number', role: 'interval' },
-            { id: 'i2', type: 'number', role: 'interval' },
-            { id: 'i2', type: 'number', role: 'interval' },
-            { id: 'i2', type: 'number', role: 'interval' },
-
-          ],
-          [1, 100, 90, 110, 85, 96, 104, 120],
-          [2, 120, 95, 130, 90, 113, 124, 140],
-          [2, 120, 95, 130, 90, 113, 124, 2],
-
-
-        ]}
+        data={chartDateBody}
       />
     );
   }
