@@ -1,7 +1,8 @@
 import React from "react";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Dashboard from "../src/components/Dashboard";
 import COVIData from "../src/components/COVIData";
+import MatrixCovid from "../src/components/MatrixCovid";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route exact path="/" component={Dashboard} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/coviData" component={COVIData} />
+        <Route path="/matrix" component={MatrixCovid} />
       </Switch>
     </BrowserRouter>
   );

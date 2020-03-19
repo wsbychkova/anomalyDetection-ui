@@ -29,7 +29,7 @@ class COVIData extends React.Component {
     cities.forEach(city => {
       chartDataHead.push(city.province)
     });
-
+console.log('cities :', cities);
     if (cities[0]) {
       for (let i in cities[0].observed_data) {
         const formatDate = moment(cities[0].observed_data[i].date).format('L')
