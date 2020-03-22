@@ -1,13 +1,13 @@
-import { GET_COVID } from '../actions/api.actions';
+import { GET_MATRIX_DATA } from '../actions/api.actions';
 
 export const defaultState = {
-  data: []
+  matrixData: []
 };
 
 export default (state = defaultState, {type, payload}) => {
     switch(type) {
-        case GET_COVID:
-            return {...state, data: payload};
+        case GET_MATRIX_DATA:
+            return {...state, matrixData: payload};
         default: 
             return state; 
     }

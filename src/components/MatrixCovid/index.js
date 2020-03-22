@@ -1,9 +1,8 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
-import Plot from 'react-plotly.js';
 
-import { getCovid } from '../../store/actions/covid.thunk';
+import { getMatrixData } from '../../store/actions/matrix.thunk';
 
 class MatrixCovid extends React.Component {
     state = {
@@ -12,40 +11,38 @@ class MatrixCovid extends React.Component {
 
 
     componentDidMount() {
-        this.props.getCovid()
+        this.props.getMatrixData()
     }
 
 
     render() {
-
+        const { matrixData } = this.props;
 
 
         return (
-            <Plot
-                data={[
-                    {
-                        x: [1, 2, 3],
-                        y: [2, 6, 3],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: { color: 'red' },
-                    },
-                    { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
-                ]}
-                layout={{ width: 320, height: 240, title: 'A Fancy Plot' }}
-            />
+            <div style={{ height: '100vh' }}>
+                <iframe
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    scrolling="no"
+                    src={`${matrixData.url}.embed`}
+                >
+
+                </iframe>
+            </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return { covid: state.covid.data }
+    return { matrixData: state.matrix.matrixData }
 }
 
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getCovid }, dispatch);
+    return bindActionCreators({ getMatrixData }, dispatch);
 }
 
 export default connect(

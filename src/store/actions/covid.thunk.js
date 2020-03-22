@@ -1,4 +1,4 @@
-import { GET_COVID } from './covid.actions';
+import { GET_COVID } from './api.actions';
 import { Axios, Api } from '../../core';
 
 export const getCovid = () => async dispatch => {

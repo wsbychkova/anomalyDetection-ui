@@ -1,6 +1,7 @@
 const Api = {
   covid: {
-    getCOVIData: "/api/covid"
+    getCOVIData: "/api/covid",
+    getMatrixData: "/api/matrix",
   }
 };
 
