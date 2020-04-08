@@ -42,17 +42,18 @@ class Regression extends React.Component {
         //         chartDateBody[i] = [i]
         //     }
         // }
+        chartDateBody.map(body => {
+            body.map()
+        })
 
         chartDateBody.map(body => {
-            console.log('body :', body);
-            // for (let i in cities) {
-            //     console.log('cities[i] :', cities[i].observed_data.map);
-            //     // cities[i].observed_data.map((data, index) => {
-            //     //     if (index === body) {
-            //     //         body.push(data.value)
-            //     //     }
-            //     // })
-            // }
+            for (let i in cities) {
+                // cities[i].observed_data.map((data, index) => {
+                //     if (index === body) {
+                //         body.push(data.value)
+                //     }
+                // })
+            }
         })
 
         // chartDateBody.splice(0, 0, chartDataHead)
