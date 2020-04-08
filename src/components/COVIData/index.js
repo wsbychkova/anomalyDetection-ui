@@ -7,10 +7,6 @@ import Chart from "react-google-charts";
 import moment from "moment";
 
 class COVIData extends React.Component {
-  state = {
-    data: []
-  };
-
   componentDidMount() {
     this.props.getCovid()
   }
