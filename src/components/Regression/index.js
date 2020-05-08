@@ -25,11 +25,11 @@ class Regression extends React.Component {
 
         const chartDataHead = ['Data', 'f(x)']
         let chartDateBody = []
-        
-        chartDateBody.push(chartDataHead)
-        calculation.forEach((y, index) => {
-            chartDateBody[index + 1] = [index, y]
 
+        calculation.forEach((y, index) => {
+            if (index<10) {
+                chartDateBody[index] = [index, Math.round(y)]
+            }
         })
 
         cities.forEach(city => {
@@ -37,27 +37,37 @@ class Regression extends React.Component {
         });
 
 
-        // if (cities[0]) {
-        //     for (let i in cities[0].observed_data) {
-        //         chartDateBody[i] = [i]
-        //     }
-        // }
-        chartDateBody.map(body => {
-            body.map()
+
+
+
+        chartDateBody.splice(0, 0, chartDataHead)
+        let test = 0;
+        chartDateBody[0].forEach((body, bodyIndex) => {
+            cities.forEach(city => {
+                if (body === city.province) {
+                    test = bodyIndex;
+                    city.observed_data.forEach((data, index) => {
+                        if (index<10) {
+                            chartDateBody[index + 1][test] = data.value
+                        }
+                        // console.log('data.value :', data.value);
+                    })
+                }
+            })
+
+            // cities.forEach(city => {
+            // city.observed_data.forEach((data, index) => {
+
+            //     chartDateBody[index + 1][test] = data.value
+            //     // console.log('data.value :', data.value);
+            // })
+
+            // })
+
         })
 
-        chartDateBody.map(body => {
-            for (let i in cities) {
-                // cities[i].observed_data.map((data, index) => {
-                //     if (index === body) {
-                //         body.push(data.value)
-                //     }
-                // })
-            }
-        })
 
-        // chartDateBody.splice(0, 0, chartDataHead)
-
+        console.log('chartDateBody :', chartDateBody);
         return (
             <>
                 <Chart

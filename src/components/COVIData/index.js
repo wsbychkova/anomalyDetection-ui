@@ -46,7 +46,7 @@ console.log('cities :', cities);
     })
 
     chartDateBody.splice(0, 0, chartDataHead)
-console.log('chartDateBody :', chartDateBody);
+
     return (
       <Chart
         width={'100%'}
