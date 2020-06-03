@@ -1,16 +1,13 @@
-import { GET_COVID, GET_COVID_RUSSIA } from '../actions/api.actions';
+import { GET_MACHINE_LEARNING } from '../actions/api.actions';
 
 export const defaultState = {
-  data: [],
-  russianData: []
+  data: []
 };
 
 export default (state = defaultState, {type, payload}) => {
     switch(type) {
-        case GET_COVID:
+        case GET_MACHINE_LEARNING:
             return {...state, data: payload};
-        case GET_COVID_RUSSIA:
-            return {...state, russianData: payload};
         default: 
             return state; 
     }
