@@ -18,54 +18,14 @@ class Regression extends React.Component {
     render() {
         const { calculation, covid } = this.props;
 
-        const cities = covid.filter(data => data.province === 'Hubei'
-            || data.province === 'Guangdong'
-            || data.province === 'Henan'
-            || data.province === 'Zhejiang')
-
         const chartDataHead = ['Data', 'f(x)']
         let chartDateBody = []
 
         calculation.forEach((y, index) => {
-            if (index<10) {
-                chartDateBody[index] = [index, Math.round(y)]
-            }
+            chartDateBody[index] = [index, Math.round(y)]
         })
-
-        cities.forEach(city => {
-            chartDataHead.push(city.province)
-        });
-
-
-
-
 
         chartDateBody.splice(0, 0, chartDataHead)
-        let test = 0;
-        chartDateBody[0].forEach((body, bodyIndex) => {
-            cities.forEach(city => {
-                if (body === city.province) {
-                    test = bodyIndex;
-                    city.observed_data.forEach((data, index) => {
-                        if (index<10) {
-                            chartDateBody[index + 1][test] = data.value
-                        }
-                        // console.log('data.value :', data.value);
-                    })
-                }
-            })
-
-            // cities.forEach(city => {
-            // city.observed_data.forEach((data, index) => {
-
-            //     chartDateBody[index + 1][test] = data.value
-            //     // console.log('data.value :', data.value);
-            // })
-
-            // })
-
-        })
-
 
         console.log('chartDateBody :', chartDateBody);
         return (
@@ -86,7 +46,7 @@ class Regression extends React.Component {
 function mapStateToProps(state) {
     return {
         calculation: state.calculation.data,
-        covid: state.covid.data
+        // covid: state.covid.data
     }
 }
 

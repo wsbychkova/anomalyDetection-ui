@@ -14,37 +14,23 @@ class COVIData extends React.Component {
 
   render() {
     const { covid } = this.props;
-    const cities = covid.filter(data => data.province === 'Hubei'
-      || data.province === 'Guangdong'
-      || data.province === 'Henan'
-      || data.province === 'Zhejiang')
-
-    const chartDataHead = ['Data']
+    const chartDataHead = ['Data', 'Infected']
     let chartDateBody = []
+    console.log('covid :>> ', covid);
+    if (covid) {
+      const sort = covid.sort((o1, o2) => {
+        var o1 = new Date(o1.date);
+        var o2 = new Date(o2.date);
+        return o1-o2;
+      });
+      sort.forEach((element, index) => {
+        const formatDate = moment(element.date).format('DD/MM/YYYY')
+        chartDateBody.push([formatDate, element.new_cases])
 
-    cities.forEach(city => {
-      chartDataHead.push(city.province)
-    });
-console.log('cities :', cities);
-    if (cities[0]) {
-      for (let i in cities[0].observed_data) {
-        const formatDate = moment(cities[0].observed_data[i].date).format('L')
-        chartDateBody[i] = [formatDate]
-      }
+      });
     }
-
-    chartDateBody.map(body => {
-      for (let i in cities) {
-        cities[i].observed_data.map(data => {
-          const formatDate = moment(data.date).format('L')
-
-          if (formatDate === body[0]) {
-            body.push(data.value)
-          }
-        })
-      }
-    })
-
+    // console.log('chartDateBody :>> ', chartDateBody);
+    
     chartDateBody.splice(0, 0, chartDataHead)
 
     return (
