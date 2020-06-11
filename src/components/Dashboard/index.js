@@ -15,6 +15,9 @@ class Dashboard extends React.Component {
         <div>
           <Link to={'regression'}>Regression</Link>
         </div>
+        <div>
+          <Link to={'machineLearning'}>Machine Learning</Link>
+        </div>
       </>
     )
   }
