@@ -2,18 +2,19 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 
-import { getMachineLearningData } from '../../store/actions/machineLearning.thunk';
+import { getSvmData, getRandomForestData } from '../../store/actions/machineLearning.thunk';
 
 class MachineLearning extends React.Component {
     componentDidMount() {
-        this.props.getMachineLearningData()
+        this.props.getSvmData()
+        this.props.getRandomForestData()
     }
 
 
     render() {
-        const { machineLearning } = this.props;
+        const { svmData, randomForestData } = this.props;
 
-        console.log('machineLearning :>> ', machineLearning);
+        console.log('machineLearning :>> ', randomForestData);
         return (
             <div style={{ height: '100vh' }}>
                 <iframe
@@ -21,7 +22,15 @@ class MachineLearning extends React.Component {
                     height="100%"
                     frameBorder="0"
                     scrolling="no"
-                    src={`${machineLearning.msg.url}.embed`}
+                    src={`${svmData.msg.url}.embed`}
+                >
+                </iframe>
+                <iframe
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    scrolling="no"
+                    src={`${randomForestData.msg.url}.embed`}
                 >
                 </iframe>
             </div>
@@ -30,13 +39,16 @@ class MachineLearning extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { machineLearning: state.machineLearning.data }
+    return { 
+        svmData: state.machineLearning.svmData,
+        randomForestData: state.machineLearning.randomForestData,
+     }
 }
 
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getMachineLearningData }, dispatch);
+    return bindActionCreators({ getSvmData, getRandomForestData }, dispatch);
 }
 
 export default connect(

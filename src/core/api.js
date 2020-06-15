@@ -3,7 +3,8 @@ const Api = {
     getCOVIData: "/api/covid",
     getMatrixData: "/api/matrix",
     getRegression: "/api/regression",
-    getMachineLearningData: "/api/machine_learning",
+    getSvmData: "/api/svm_train",
+    getRandomForestData: "/api/random_forest_train",
   }
 };
 

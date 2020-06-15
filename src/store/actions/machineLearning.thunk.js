@@ -1,14 +1,25 @@
-import { GET_MACHINE_LEARNING_DATA } from './api.actions';
+import { GET_SVM_DATA, GET_RANDOM_FOREST_DATA } from './api.actions';
 import { Axios, Api } from '../../core';
-import * as actions from './api.actions';
 
 
-export const getMachineLearningData = () => async dispatch => {
-    
+export const getSvmData = () => async dispatch => {
     try {
-        const response = await Axios.get(Api.covid.getMachineLearningData)
+        const response = await Axios.get(Api.covid.getSvmData)
         dispatch({
-            type: GET_MACHINE_LEARNING_DATA,
+            type: GET_SVM_DATA,
+            payload: response.data
+        })
+    } catch (error) {
+        console.log("error", error);
+    }
+};
+
+export const getRandomForestData = () => async dispatch => {
+    try {
+        const response = await Axios.get(Api.covid.getRandomForestData)
+        console.log('response :>> ', response);
+        dispatch({
+            type: GET_RANDOM_FOREST_DATA,
             payload: response.data
         })
     } catch (error) {
