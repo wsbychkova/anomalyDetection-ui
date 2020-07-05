@@ -1,5 +1,5 @@
-export const GET_COVID = 'GET_COVID';
-export const GET_MATRIX_DATA = 'GET_MATRIX_DATA';
-export const GET_REGRESSION = 'GET_REGRESSION';
-export const GET_SVM_DATA = 'GET_SVM_DATA';
-export const GET_RANDOM_FOREST_DATA = 'GET_RANDOM_FOREST_DATA';
+export const getAnomalyDetection = {
+    request: 'GET_ANOMALY_DETECTION_REQUEST',
+    success: 'GET_ANOMALY_DETECTION_SUCCESS',
+    failure: 'GET_ANOMALY_DETECTION_FAIL',
+  };

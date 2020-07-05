@@ -1,23 +1,32 @@
-import { GET_SVM_DATA, GET_RANDOM_FOREST_DATA } from '../actions/api.actions';
+import * as actions from "../actions/api.actions";
 
 export const defaultState = {
-  svmData: {
-    resultData: [],
-    msg: {}
-  },
-  randomForestData: {
-    resultData: [],
-    msg: {}
-  },
+  data: null,
+  loading: false,
+  error: null,
 };
 
-export default (state = defaultState, { type, payload }) => {
-  switch (type) {
-    case GET_SVM_DATA:
-      return { ...state, data: payload };
-    case GET_RANDOM_FOREST_DATA:
-      return { ...state, randomForestData: payload };
+export default (state = defaultState, action) => {
+  switch (action.type) {
+    case actions.getAnomalyDetection.request:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actions.getAnomalyDetection.success:
+      console.log('action.payload :>> ', action.payload);
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+    case actions.getAnomalyDetection.failure:
+      return {
+        ...state,
+        error: action.error,
+        loading: true,
+      };
     default:
       return state;
   }
-}
+};
